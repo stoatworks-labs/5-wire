@@ -97,11 +97,19 @@ endif()
 add_library(FiveWire MODULE source/PluginEntry.cpp)
 target_link_libraries(FiveWire PRIVATE fivewire_core)
 
+# The CMake target is FiveWire and the artefact is 5-wire, because a CMake
+# target name beginning with a digit is asking for trouble and the plugin's
+# name begins with one. Set OUTSIDE the APPLE block, and that is the whole
+# point of this line: it lived inside it at first, so the macOS bundle was
+# 5-wire.bundle and the Windows build quietly produced FiveWire.dll. Nothing
+# failed -- the compile was clean and the log was green -- until the release
+# job went looking for a file by the name the macOS half had taught it.
+set_target_properties(FiveWire PROPERTIES OUTPUT_NAME "5-wire")
+
 if(APPLE)
     set_target_properties(FiveWire PROPERTIES
         BUNDLE TRUE
         BUNDLE_EXTENSION "bundle"
-        OUTPUT_NAME "5-wire"
         MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Info.plist.in"
         MACOSX_BUNDLE_BUNDLE_NAME "5-wire"
         MACOSX_BUNDLE_GUI_IDENTIFIER "com.stoatworks.ffgl.fivewire"
