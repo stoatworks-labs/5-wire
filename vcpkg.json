@@ -1,0 +1,11 @@
+{
+  "name": "5-wire",
+  "version-string": "0.1.0",
+  "description": "Dependencies for building the 5-wire FFGL plugin. GLEW is only needed on Windows and Linux; macOS uses the system OpenGL framework. Nothing points at this file from CMakeLists.txt — find_package(GLEW) succeeds because the vcpkg manifest put it there — so deleting it fails the Windows job at CONFIGURE time while every macOS build and every local build carries on passing.",
+  "dependencies": [
+    {
+      "name": "glew",
+      "platform": "!osx"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+/*
+ * Stoatworks Labs - About window data for 5-wire.
+ *
+ * PLACEHOLDER, hand-written when the repo was created 2026-08-24. It will be
+ * overwritten the first time sync-about.py runs against a projects.json entry
+ * for this plugin -- until then the page and repo links below point at URLs
+ * that do not exist yet. Do not
+ * edit: the next sync overwrites it. The facts come from the website's
+ * projects.json, which is the one place they are written down.
+ *
+ * `version` here is a fallback read from this repo's own manifest at sync
+ * time. Anything with a build step injects the real one at build time and
+ * overrides this.
+ */
+#pragma once
+
+namespace stoatworks::about
+{
+    inline constexpr auto name = "5-wire";
+    inline constexpr auto slug = "5-wire";
+    inline constexpr auto hook = "Long VGA and RGBHV cable runs for Resolume";
+    inline constexpr auto licence = "MIT";
+    inline constexpr auto guide = "";
+    inline constexpr auto page = "https://stoatworks-labs.com/software/5-wire/";
+    inline constexpr auto repo = "https://github.com/stoatworks-labs/5-wire";
+    inline constexpr auto versionFallback = "v0.1.0";
+
+    inline constexpr auto org = "Stoatworks Labs";
+    inline constexpr auto home = "https://stoatworks-labs.com";
+    inline constexpr auto tagline = "Open tools for the people who run the show.";
+
+    /* The canonical funding links, matching FUNDING.yml and the support footer. */
+    struct Link { const char* name; const char* url; };
+    inline constexpr Link funding[] = {
+        { "GitHub Sponsors", "https://github.com/sponsors/stoatworks-labs" },
+        { "Ko-fi", "https://ko-fi.com/stoatworkslabs" },
+        { "Patreon", "https://patreon.com/StoatworksLabs" },
+        { "Liberapay", "https://liberapay.com/stoatworks-labs" },
+    };
+}
