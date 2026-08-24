@@ -89,11 +89,11 @@ inline constexpr Preset kPresets[] = {
 
 	//Nobody terminated the far end and the amplifier has no series resistor.
 	//A ghost train, marching to the right.
-	{ "Unterminated",   { 0.00f, 0.60f, 0.95f, 0.90f, 3.00f, 0.20f, 0.20f, 0.60f, 0.10f, 0.08f, 0.05f, 0.35f, 0.80f, 0.00f, 0.10f, 0.50f, 0.50f, 0.50f, 0.50f, 0.00f, 0.60f, 0.50f, 0.00f, 0.50f, 0.50f, 0.90f, 0.00f } },
+	{ "Unterminated",   { 0.00f, 0.60f, 0.86f, 0.55f, 2.00f, 0.20f, 0.20f, 0.60f, 0.10f, 0.08f, 0.05f, 0.35f, 0.80f, 0.00f, 0.10f, 0.50f, 0.50f, 0.50f, 0.50f, 0.00f, 0.60f, 0.50f, 0.00f, 0.50f, 0.50f, 0.90f, 0.00f } },
 
 	//The lead out of the bottom of the flight case, run twenty-five metres
 	//across a floor full of dimmer packs.
-	{ "Skip Lead",      { 1.00f, 0.42f, 0.72f, 0.45f, 1.00f, 0.40f, 0.55f, 0.30f, 0.35f, 0.65f, 0.45f, 0.28f, 0.65f, 0.00f, 0.40f, 0.50f, 0.50f, 0.45f, 0.42f, 0.00f, 0.42f, 0.50f, 0.25f, 0.52f, 0.50f, 0.70f, 0.35f } },
+	{ "Skip Lead",      { 1.00f, 0.42f, 0.72f, 0.45f, 1.00f, 0.40f, 0.55f, 0.30f, 0.35f, 0.65f, 0.45f, 0.28f, 0.65f, 0.00f, 0.40f, 0.50f, 0.50f, 0.48f, 0.46f, 0.00f, 0.42f, 0.50f, 0.25f, 0.52f, 0.50f, 0.70f, 0.35f } },
 
 	//Passive baluns over structured cabling. The pairs are different lengths
 	//by design, so every vertical edge grows a colour fringe.
@@ -106,11 +106,11 @@ inline constexpr Preset kPresets[] = {
 	//An amplifier that has been in the rack since the last century: the
 	//clamp has given up, the channels have drifted apart and the phase is
 	//half a pixel out.
-	{ "Tired Amp",      { 1.00f, 0.50f, 0.68f, 0.50f, 1.00f, 0.40f, 0.45f, 0.35f, 0.30f, 0.40f, 0.20f, 0.35f, 0.55f, 0.00f, 0.45f, 0.42f, 0.58f, 0.50f, 0.38f, 0.35f, 0.75f, 0.15f, 0.55f, 0.58f, 0.44f, 0.15f, 0.50f } },
+	{ "Tired Amp",      { 1.00f, 0.50f, 0.68f, 0.50f, 1.00f, 0.40f, 0.45f, 0.35f, 0.30f, 0.40f, 0.20f, 0.35f, 0.55f, 0.00f, 0.45f, 0.46f, 0.545f, 0.50f, 0.455f, 0.35f, 0.75f, 0.15f, 0.55f, 0.58f, 0.44f, 0.15f, 0.50f } },
 
 	//Everything at once, for the shot where the picture is meant to be
 	//falling apart rather than merely tired.
-	{ "Dead Run",       { 4.00f, 0.95f, 0.90f, 0.80f, 3.00f, 0.90f, 0.90f, 0.15f, 0.55f, 0.80f, 0.70f, 0.42f, 0.15f, 1.00f, 0.95f, 0.55f, 0.55f, 0.45f, 0.60f, 0.00f, 0.55f, 0.35f, 0.75f, 0.55f, 0.55f, 0.05f, 0.45f } },
+	{ "Dead Run",       { 4.00f, 0.95f, 0.86f, 0.60f, 2.00f, 0.90f, 0.90f, 0.15f, 0.35f, 0.60f, 0.50f, 0.42f, 0.15f, 1.00f, 0.95f, 0.50f, 0.52f, 0.48f, 0.55f, 0.00f, 0.55f, 0.35f, 0.50f, 0.50f, 0.50f, 0.05f, 0.45f } },
 };
 
 inline constexpr int kCount = static_cast< int >( sizeof( kPresets ) / sizeof( kPresets[ 0 ] ) );

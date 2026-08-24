@@ -210,7 +210,14 @@ Drive drive( const Settings& settings, float time, float framePeriod, float outp
 	//---------------------------------------------------------------------
 	const float shielding    = std::clamp( spec.shielding * ( 0.5f + settings.screening ), 0.0f, 1.0f );
 	const float lengthAerial = std::clamp( std::sqrt( metres / 25.0f ), 0.0f, 2.5f );
-	const float pickup       = ( 1.0f - shielding ) * lengthAerial;
+
+	//Capped, and the cap is not arbitrary. Hum and ingress are ADDITIVE and
+	//two-sided, so they swing the picture both ways about itself; at a pickup
+	//of two and a bit, an unscreened hundred-metre loom put a peak of two
+	//thirds of full scale on top of a mid grey and the picture was simply
+	//white. Past this the artefact has stopped being interference and become
+	//a light source.
+	const float pickup = std::min( ( 1.0f - shielding ) * lengthAerial, 1.6f );
 
 	//Crosstalk is the ONLY one of these that is not pickup from outside: it is
 	//the conductors coupling into each other, so it scales with length and
