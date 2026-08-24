@@ -4,9 +4,10 @@ name: release
 #   - macOS   -> universal (arm64 + x86_64) 5-wire.bundle
 #   - Windows -> x64 5-wire.dll (GLEW static-linked via vcpkg)
 # Each ships as a zip; drop the bundle/dll into Resolume's "Extra Effects"
-# folder. The OpenFX build ships as its own zip alongside, and the browser demo
-# is not part of a release at all -- it deploys separately to Cloudflare. Trigger manually (Actions > release > Run workflow) or by pushing a
-# v* tag.
+# folder. There is no OpenFX build in this repo, and the browser demo is not
+# part of a release at all -- it deploys separately to Cloudflare.
+#
+# Trigger manually (Actions > release > Run workflow) or by pushing a v* tag.
 #
 # Dispatching this manually is the cheap way to test an FFGL build without
 # publishing anything: the release job below is gated on refs/tags/v*, so a
