@@ -17,6 +17,7 @@
 A long run of VGA or RGBHV, and the amplifier at each end of it, as an FFGL
 effect for [Resolume](https://resolume.com) Arena and Avenue.
 
+**Video:** [What it does, in 40 seconds](https://www.youtube.com/watch?v=CGt9p3fhMJc)
 **Try it in your browser:** [5-wire-demo.stoatworks-labs.com](https://5-wire-demo.stoatworks-labs.com) — the plugin's own shaders, on real pixels.
 
 ![The same hundred metres of coax twice: soft with no fine detail, then equalised — sharp again and grainy](docs/hero.png)
