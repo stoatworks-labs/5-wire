@@ -258,3 +258,10 @@ fetches per bounce instead of sixty-four.
 - **No real long run has been photographed and compared against this.** The
   model is right; whether the *amounts* match a particular cable on a particular
   floor is not something anything here has tested.
+
+## Notes
+
+`docs/NOTES.md` carries this repo's working notes — current status, decisions
+already made, and the traps that have actually bitten. Read it before changing
+anything non-obvious. Cross-cutting fleet knowledge lives in
+[fleet-notes](https://github.com/stoatworks-labs/fleet-notes).
