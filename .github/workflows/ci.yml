@@ -56,6 +56,13 @@ jobs:
       - name: Factory presets against three host behaviours
         run: ./build/fwtest --presets
 
+      # The browser demo's shaders are generated from source/shaders/ and
+      # committed. This is what stops the committed copy drifting from the
+      # plugin's own GLSL — the demo would go on looking like a demo of the
+      # plugin while running something else.
+      - name: The demo runs the plugin's shaders
+        run: node demo/extract-shaders.mjs --check
+
       # Uploading is not only for the artefact. This repo has no package
       # manifest, so github-actions is its only Dependabot ecosystem — and a
       # bump to actions/upload-artifact otherwise touches release.yml alone,
