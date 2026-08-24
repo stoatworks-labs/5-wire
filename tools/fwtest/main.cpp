@@ -49,6 +49,9 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <fstream>
+#include <map>
+#include <sstream>
 #include <string>
 #include <vector>
 
@@ -1002,6 +1005,90 @@ int checkPresets()
 }
 
 //---------------------------------------------------------------------------
+// Parameter automation for --pipe.
+//
+// A plain text file of `frame  Parameter Name  value` lines. Values are held
+// before the first key and after the last, and linearly interpolated between.
+// This is what the video pipeline drives the plugin with: the cue sheet IS the
+// edit, so a beat is moved by moving a number rather than by re-rendering to a
+// different plan.
+//---------------------------------------------------------------------------
+using Track = std::vector< std::pair< int, float > >;
+
+std::map< std::string, Track > loadScript( const std::string& path, std::string& error )
+{
+	std::map< std::string, Track > tracks;
+	std::ifstream file( path );
+	if( !file )
+	{
+		error = "cannot open " + path;
+		return tracks;
+	}
+
+	std::string line;
+	int lineNumber = 0;
+	while( std::getline( file, line ) )
+	{
+		++lineNumber;
+		const size_t hash = line.find( '#' );
+		if( hash != std::string::npos )
+			line.erase( hash );
+		std::istringstream in( line );
+
+		int frame = 0;
+		if( !( in >> frame ) )
+			continue;//blank or comment
+
+		//The name is everything up to the last token, because parameters have
+		//spaces in them and the value never does.
+		std::vector< std::string > words;
+		std::string word;
+		while( in >> word )
+			words.push_back( word );
+		if( words.size() < 2 )
+		{
+			error = path + ":" + std::to_string( lineNumber ) + ": expected `frame Parameter Name value`";
+			return {};
+		}
+
+		const float value = std::strtof( words.back().c_str(), nullptr );
+		words.pop_back();
+		std::string name = words.front();
+		for( size_t i = 1; i < words.size(); ++i )
+			name += " " + words[ i ];
+
+		tracks[ name ].emplace_back( frame, value );
+	}
+
+	for( auto& entry : tracks )
+		std::sort( entry.second.begin(), entry.second.end() );
+	return tracks;
+}
+
+float valueAt( const Track& track, int frame )
+{
+	if( track.empty() )
+		return 0.0f;
+	if( frame <= track.front().first )
+		return track.front().second;
+	if( frame >= track.back().first )
+		return track.back().second;
+
+	for( size_t i = 1; i < track.size(); ++i )
+	{
+		if( frame <= track[ i ].first )
+		{
+			const auto& a   = track[ i - 1 ];
+			const auto& b   = track[ i ];
+			const float span = static_cast< float >( b.first - a.first );
+			const float t    = span > 0.0f ? ( static_cast< float >( frame - a.first ) / span ) : 1.0f;
+			return a.second + ( b.second - a.second ) * t;
+		}
+	}
+	return track.back().second;
+}
+
+//---------------------------------------------------------------------------
 void usage()
 {
 	std::printf(
@@ -1016,6 +1103,7 @@ void usage()
 	    "  --fps N                what to tell the plugin the frame rate is\n"
 	    "  --impulse-picture      render a single column instead of the test card\n"
 	    "  --pipe                 rawvideo rgba on stdin, rawvideo rgba on stdout\n"
+	    "  --script FILE          animate controls under --pipe: `frame Name value` lines\n"
 	    "\n"
 	    "  --kernel               the cable's response against exp(-alpha*sqrt(pi*f))\n"
 	    "  --eq                   the equaliser against the cable it inverts\n"
@@ -1051,6 +1139,7 @@ int main( int argc, char** argv )
 	bool pipeMode          = false;
 	bool impulsePicture    = false;
 	double fps             = 60.0;
+	std::string scriptPath;
 	std::vector< std::pair< std::string, float > > overrides;
 
 	for( int i = 1; i < argc; ++i )
@@ -1086,6 +1175,8 @@ int main( int argc, char** argv )
 			pipeMode = true;
 		else if( arg == "--impulse-picture" )
 			impulsePicture = true;
+		else if( arg == "--script" )
+			scriptPath = next();
 		else if( arg == "--set" )
 		{
 			const std::string assignment = next();
@@ -1190,6 +1281,29 @@ int main( int argc, char** argv )
 
 	if( pipeMode )
 	{
+		std::map< std::string, Track > tracks;
+		if( !scriptPath.empty() )
+		{
+			std::string error;
+			tracks = loadScript( scriptPath, error );
+			if( !error.empty() )
+			{
+				std::fprintf( stderr, "fwtest: %s\n", error.c_str() );
+				return 2;
+			}
+			//Fail on a name that does not exist rather than silently animating
+			//nothing for a minute of footage.
+			for( const auto& entry : tracks )
+			{
+				if( rig.indexOfParameter( entry.first ) < 0 )
+				{
+					std::fprintf( stderr, "fwtest: script names '%s', which is not a parameter (try --list)\n",
+					              entry.first.c_str() );
+					return 2;
+				}
+			}
+		}
+
 		const size_t frameBytes = static_cast< size_t >( width ) * height * 4;
 		const size_t rowBytes   = static_cast< size_t >( width ) * 4;
 		std::vector< unsigned char > in( frameBytes );
@@ -1204,6 +1318,11 @@ int main( int argc, char** argv )
 				std::memcpy( flip.data() + static_cast< size_t >( y ) * rowBytes,
 				             in.data() + static_cast< size_t >( height - 1 - y ) * rowBytes, rowBytes );
 			rig.replacePicture( flip );
+
+			for( const auto& entry : tracks )
+				rig.plugin.SetFloatParameter(
+				    static_cast< unsigned int >( rig.indexOfParameter( entry.first ) ),
+				    valueAt( entry.second, static_cast< int >( frame ) ) );
 
 			const double seconds = static_cast< double >( frame ) / fps;
 			rig.plugin.SetClockScaleForTest( 1.0 );
