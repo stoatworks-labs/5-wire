@@ -126,14 +126,14 @@ display, and fixed at the amplifier.
 
 ## Download
 
-**[v0.1.1](https://github.com/stoatworks-labs/5-wire/releases/tag/v0.1.1)** — prebuilt for macOS and Windows. Pick your platform:
+**[v0.1.2](https://github.com/stoatworks-labs/5-wire/releases/tag/v0.1.2)** — prebuilt for macOS and Windows. Pick your platform:
 
 <details>
 <summary><b>macOS</b> — Universal (Apple Silicon + Intel)</summary>
 
 | Build | Download | Size |
 | --- | --- | --- |
-| Universal (Apple Silicon + Intel) · .dmg disk image | [`5-wire-0.1.1-macos-universal.dmg`](https://github.com/stoatworks-labs/5-wire/releases/download/v0.1.1/5-wire-0.1.1-macos-universal.dmg) | 219 KB |
+| Universal (Apple Silicon + Intel) · .dmg disk image | [`5-wire-0.1.2-macos-universal.dmg`](https://github.com/stoatworks-labs/5-wire/releases/download/v0.1.2/5-wire-0.1.2-macos-universal.dmg) | 219 KB |
 | Universal (Apple Silicon + Intel) · .zip archive | [`5-wire-macos-universal.zip`](https://github.com/stoatworks-labs/5-wire/releases/latest/download/5-wire-macos-universal.zip) | 181 KB |
 
 </details>
@@ -143,7 +143,7 @@ display, and fixed at the amplifier.
 
 | Build | Download | Size |
 | --- | --- | --- |
-| x64 · .exe installer | [`5-wire-0.1.1-windows-x86_64-setup.exe`](https://github.com/stoatworks-labs/5-wire/releases/download/v0.1.1/5-wire-0.1.1-windows-x86_64-setup.exe) | 223 KB |
+| x64 · .exe installer | [`5-wire-0.1.2-windows-x86_64-setup.exe`](https://github.com/stoatworks-labs/5-wire/releases/download/v0.1.2/5-wire-0.1.2-windows-x86_64-setup.exe) | 222 KB |
 | x64 · .zip archive | [`5-wire-windows-x86_64.zip`](https://github.com/stoatworks-labs/5-wire/releases/latest/download/5-wire-windows-x86_64.zip) | 116 KB |
 
 </details>
