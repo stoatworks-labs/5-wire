@@ -23,7 +23,7 @@ static CFFGLPluginInfo PluginInfo(
 	1,                                                                // Plugin major version number
 	0,                                                                // Plugin minor version number
 	FF_EFFECT,                                                        // Plugin type
-	"A long run of VGA or RGBHV, and the amplifier at each end of it",// Plugin description
+	"A long run of VGA or RGBHV, and the amplifier at each end of it.\n\nNot five effects on a picture: one linear response per conductor, and everything you recognise is a consequence of it. The soft picture is that response's head. The streak after a bright area is its tail, hundreds of pixels long and a hundredth as tall. A displaced repeat is the same response arriving twice, off a mismatched end.\n\nCoax loss goes as the square root of frequency, so the smear is strictly causal: it runs to the right and only to the right. That is the difference between reading as a long cable and reading as a blur.",// Plugin description
 	"5-wire FFGL effect"                                              // About
 );
 
