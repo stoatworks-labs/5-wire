@@ -17,7 +17,7 @@ using namespace fivewire;
 static CFFGLPluginInfo PluginInfo(
 	PluginFactory< FiveWire >,                                        // Create method
 	"5W01",                                                           // Plugin unique ID of maximum length 4.
-	"5-wire",                                                         // Plugin name
+	"SW 5-wire",                                                      // Plugin name
 	2,                                                                // API major version number
 	1,                                                                // API minor version number
 	1,                                                                // Plugin major version number
