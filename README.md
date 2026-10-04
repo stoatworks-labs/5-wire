@@ -189,9 +189,11 @@ for a faster development build.
   ad-hoc signs. The macOS build is universal by `lipo`.
 
 Not established: it has never been loaded into Resolume or any other FFGL host;
-nothing has been built for Windows or Linux; there is no OpenFX build; and the
-cable *numbers* — loss, velocity, skew — are the manufacturers', but the
-crosstalk, pickup and sync constants are calibrated by eye rather than measured.
+the Windows build comes from CI and ships with every release, but has never been
+loaded into Resolume on Windows; there is no Linux build; there is no OpenFX
+build; and the cable *numbers* — loss, velocity, skew — are the manufacturers',
+but the crosstalk, pickup and sync constants are calibrated by eye rather than
+measured.
 
 ## Documentation
 
