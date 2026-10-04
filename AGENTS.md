@@ -245,8 +245,9 @@ fetches per bounce instead of sixty-four.
   directly, which means the parameter declarations, the group layout, the About
   block and the event handling are all unproven in a real host — the exact class
   of thing `SetTextParameter` is a trap about.
-- **Nothing has been built on Windows or Linux.** The macOS build IS universal
-  and checked with `lipo`; that one is verified.
+- **The Windows build comes from CI and has never been loaded into Resolume on
+  Windows.** It ships with every release; there is no Linux build. The macOS
+  build IS universal and checked with `lipo`; that one is verified.
 - **There is no OpenFX build.** The model is deliberately in `Cable.cpp` and
   `Controls.cpp` with no GL in either, so an OFX target can link them straight
   from source and only the per-pixel half would need mirroring.
