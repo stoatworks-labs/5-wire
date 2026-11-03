@@ -17,6 +17,8 @@ drawn on. Anyone who's had to run VGA the length of a ballroom will recognise th
 **Video:** [What it does, in 40 seconds](https://www.youtube.com/watch?v=CGt9p3fhMJc)
 **Try it in your browser:** [5-wire-demo.stoatworks-labs.com](https://5-wire-demo.stoatworks-labs.com), with the plugin's own shaders on real pixels.
 
+The [project page](https://stoatworks-labs.com/software/5-wire/) has the downloads, the [user guide](https://stoatworks-labs.com/software/5-wire/guide/) and the video.
+
 ![The same hundred metres of coax twice: soft with no fine detail, then equalised, sharp again and grainy](docs/hero.png)
 
 <sub>Two renders of the plugin's own test card, both through the same 101 m of thin coax. The top
